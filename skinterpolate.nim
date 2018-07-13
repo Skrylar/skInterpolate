@@ -110,11 +110,11 @@ proc bicubic* [T:SomeReal](x, y
   ## four necessary points (f(-1), f(0), f(1), and f(20))
   ## for the top left, top right, bottom left and bottom
   ## right of the space.
-  let a = cubic(y, tlm1, tl0, tl1, tl2)
-  let b = cubic(y, trm1, tr0, tr1, tr2)
-  let c = cubic(y, blm1, bl0, bl1, bl2)
-  let d = cubic(y, brm1, br0, br1, br2)
-  return cubic(x, a, b, c, d)
+  let a = cubic(x, tlm1, tl0, tl1, tl2)
+  let b = cubic(x, trm1, tr0, tr1, tr2)
+  let c = cubic(x, blm1, bl0, bl1, bl2)
+  let d = cubic(x, brm1, br0, br1, br2)
+  return cubic(y, a, b, c, d)
 
 when isMainModule:
   import unittest, fenv
