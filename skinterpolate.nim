@@ -101,6 +101,21 @@ proc cubic* [T:SomeReal] (t, v0, v1: T): T =
   ## the extra points are extrapolated in this call.
   return cubic(t, ((2 * v0) - v1), v0, v1, ((2 * v1) - v0))
 
+proc bicubic* [T:SomeReal](x, y
+                           tlm1, tl0, tl1, tl2,
+                           trm1, tr0, tr1, tr2,
+                           blm1, bl0, bl1, bl2,
+                           brm1, br0, br1, br2: T): T =
+  ## Performs bicubic interpolation. You must specify the
+  ## four necessary points (f(-1), f(0), f(1), and f(20))
+  ## for the top left, top right, bottom left and bottom
+  ## right of the space.
+  let a = cubic(y, tlm1, tl0, tl1, tl2)
+  let b = cubic(y, trm1, tr0, tr1, tr2)
+  let c = cubic(y, blm1, bl0, bl1, bl2)
+  let d = cubic(y, brm1, br0, br1, br2)
+  return cubic(x, a, b, c, d)
+
 when isMainModule:
   import unittest, fenv
 
